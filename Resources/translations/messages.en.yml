@@ -1,0 +1,7 @@
+licenses:
+  label: Licenses
+  project: Project
+  license: License
+  authors: Authors
+  header: "%project%: %license_type%"
+  back: back

@@ -1,0 +1,21 @@
+{
+    "name": "frostiede/composer-dependency-list-bundle",
+    "version": "1.0.0",
+    "type": "symfony-bundle",
+    "require": {
+        "symfony/framework-bundle": "^3.0|^4.0",
+        "frostiede/composer-dependency-list": "^1.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marcel Marnitz",
+            "email": "marcelmarnitz@googlemail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "FrostieDE\\ComposerDependencyListBundle\\": ""
+        }
+    }
+}

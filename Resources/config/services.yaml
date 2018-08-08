@@ -1,0 +1,18 @@
+services:
+    FrostieDE\ComposerDependencyList\ComposerDependenciesResolver:
+        arguments:
+            - '%composer_dependency_list.lock_file%'
+
+    FrostieDE\ComposerDependencyList\ComposerDependenciesResolverInterface: '@FrostieDE\ComposerDependencyList\ComposerDependenciesResolver'
+
+    FrostieDE\ComposerDependencyListBundle\Controller\:
+        resource: '../../Controller'
+        autowire: true
+        autoconfigure: true
+        tags: [ 'controller.service_arguments' ]
+
+    FrostieDE\ComposerDependencyListBundle\Command\:
+        resource: '../../Command'
+        autowire: true
+        autoconfigure: true
+        tags: [ 'console.command' ]
