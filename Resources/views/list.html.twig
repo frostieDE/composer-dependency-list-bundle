@@ -39,7 +39,11 @@
                         </td>
                         <td>
                             {% for author in dependency.authors %}
-                                {{ author.name }}{% if not loop.last %}, {% endif %}
+                                {% if author.email is not empty %}
+                                    <a href="mailto:{{ author.email }}">{{ author.name|default(author.email) }}</a>{% if not loop.last %}, {% endif %}
+                                {% elseif author.name is not empty %}
+                                    {{ author.name }}{% if not loop.last %}, {% endif %}
+                                {% endif %}
                             {% endfor %}
                         </td>
                     </tr>
