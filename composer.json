@@ -1,6 +1,6 @@
 {
     "name": "frostiede/composer-dependency-list-bundle",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "type": "symfony-bundle",
     "require": {
         "symfony/framework-bundle": "^3.0|^4.0",
