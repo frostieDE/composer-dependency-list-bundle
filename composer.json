@@ -4,7 +4,8 @@
     "type": "symfony-bundle",
     "require": {
         "symfony/framework-bundle": "^3.0|^4.0",
-        "frostiede/composer-dependency-list": "^1.0"
+        "frostiede/composer-dependency-list": "^1.0",
+        "symfony/console": "^4.2"
     },
     "license": "MIT",
     "authors": [

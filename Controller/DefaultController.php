@@ -4,12 +4,11 @@ namespace FrostieDE\ComposerDependencyListBundle\Controller;
 
 use FrostieDE\ComposerDependencyList\ComposerDependenciesResolverInterface;
 use FrostieDE\ComposerDependencyList\Dependency;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DefaultController extends Controller {
+class DefaultController extends AbstractController {
 
     private $dependencyResolver;
 
