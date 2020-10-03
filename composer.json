@@ -1,6 +1,6 @@
 {
     "name": "frostiede/composer-dependency-list-bundle",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "type": "symfony-bundle",
     "require": {
         "php": "^7.2",
