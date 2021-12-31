@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ListDependenciesCommand extends Command {
 
-    private $dependenciesResolver;
+    private ComposerDependenciesResolverInterface $dependenciesResolver;
 
     public function __construct(ComposerDependenciesResolverInterface $dependenciesResolver, ?string $name = null) {
         parent::__construct($name);
@@ -24,7 +24,7 @@ class ListDependenciesCommand extends Command {
             ->setDescription('Lists all composer dependencies.');
     }
 
-    public function execute(InputInterface $input, OutputInterface $output) {
+    public function execute(InputInterface $input, OutputInterface $output): int {
         $table = new Table($output);
         $table->setHeaders(['Project', 'License', 'Authors']);
 

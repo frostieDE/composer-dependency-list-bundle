@@ -5,12 +5,13 @@ namespace FrostieDE\ComposerDependencyListBundle\Controller;
 use FrostieDE\ComposerDependencyList\ComposerDependenciesResolverInterface;
 use FrostieDE\ComposerDependencyList\Dependency;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController {
 
-    private $dependencyResolver;
+    private ComposerDependenciesResolverInterface $dependencyResolver;
 
     public function __construct(ComposerDependenciesResolverInterface $dependencyResolver) {
         $this->dependencyResolver = $dependencyResolver;
@@ -19,7 +20,7 @@ class DefaultController extends AbstractController {
     /**
      * @Route("/list", name="list_composer_dependencies")
      */
-    public function listDependencies() {
+    public function listDependencies(): Response {
         $dependencies = $this->dependencyResolver->getDependencies();
         $template = $this->getParameter('composer_dependency_list.list_template');
 
@@ -31,7 +32,7 @@ class DefaultController extends AbstractController {
     /**
      * @Route("/license/{project}", name="show_license", requirements={"project"= ".+"})
      */
-    public function showLicense($project) {
+    public function showLicense($project): Response {
         $dependency = $this->getDependency($project);
 
         if($dependency === null) {
@@ -57,7 +58,7 @@ class DefaultController extends AbstractController {
      * @param $project
      * @return Dependency|null
      */
-    private function getDependency($project) {
+    private function getDependency($project): ?Dependency {
         $dependencies = $this->dependencyResolver->getDependencies();
 
         foreach($dependencies as $dependency) {
