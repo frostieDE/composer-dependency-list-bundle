@@ -2,6 +2,6 @@ licenses:
   label: Lizenzen
   project: Projekt
   license: Lizenz
-  authors: Authoren
+  authors: Autoren
   header: "%project%: %license_type%"
   back: zurück
