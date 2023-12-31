@@ -5,10 +5,13 @@ services:
 
     FrostieDE\ComposerDependencyList\ComposerDependenciesResolverInterface: '@FrostieDE\ComposerDependencyList\ComposerDependenciesResolver'
 
-    FrostieDE\ComposerDependencyListBundle\Controller\:
-        resource: '../../Controller'
+    FrostieDE\ComposerDependencyListBundle\Controller\DefaultController:
         autowire: true
         autoconfigure: true
+        arguments:
+            #$dependencyResolver: '@FrostieDE\ComposerDependencyList\ComposerDependenciesResolverInterface'
+            $listTemplate: '%composer_dependency_list.list_template%'
+            $licenseTemplate: '%composer_dependency_list.license_template%'
         tags: [ 'controller.service_arguments' ]
 
     FrostieDE\ComposerDependencyListBundle\Command\:

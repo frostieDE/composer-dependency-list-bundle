@@ -11,35 +11,25 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController {
 
-    private ComposerDependenciesResolverInterface $dependencyResolver;
 
-    public function __construct(ComposerDependenciesResolverInterface $dependencyResolver) {
-        $this->dependencyResolver = $dependencyResolver;
-    }
+    public function __construct(private readonly ComposerDependenciesResolverInterface $dependencyResolver, private readonly string $listTemplate, private readonly string $licenseTemplate) { }
 
-    /**
-     * @Route("/list", name="list_composer_dependencies")
-     */
+    #[Route("/list", name: "list_composer_dependencies")]
     public function listDependencies(): Response {
         $dependencies = $this->dependencyResolver->getDependencies();
-        $template = $this->getParameter('composer_dependency_list.list_template');
 
-        return $this->render($template, [
+        return $this->render($this->listTemplate, [
             'dependencies' => $dependencies
         ]);
     }
 
-    /**
-     * @Route("/license/{project}", name="show_license", requirements={"project"= ".+"})
-     */
-    public function showLicense($project): Response {
+    #[Route('/license/{project}', name: "show_license", requirements: ["project" => ".+"])]
+    public function showLicense(string $project): Response {
         $dependency = $this->getDependency($project);
 
         if($dependency === null) {
             throw new NotFoundHttpException();
         }
-
-        $template = $this->getParameter('composer_dependency_list.license_template');
 
         $licensePath = $dependency->getLicensePath();
         $license = null;
@@ -48,17 +38,17 @@ class DefaultController extends AbstractController {
             $license = file_get_contents($licensePath);
         }
 
-        return $this->render($template, [
+        return $this->render($this->licenseTemplate, [
             'dependency' => $dependency,
             'license' => $license
         ]);
     }
 
     /**
-     * @param $project
+     * @param string $project
      * @return Dependency|null
      */
-    private function getDependency($project): ?Dependency {
+    private function getDependency(string $project): ?Dependency {
         $dependencies = $this->dependencyResolver->getDependencies();
 
         foreach($dependencies as $dependency) {
