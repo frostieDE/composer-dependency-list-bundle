@@ -4,11 +4,13 @@ namespace FrostieDE\ComposerDependencyListBundle\Command;
 
 use FrostieDE\ComposerDependencyList\Author;
 use FrostieDE\ComposerDependencyList\ComposerDependenciesResolverInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand('dependencies:list', description: 'Lists all composer dependencies.')]
 class ListDependenciesCommand extends Command {
 
     private ComposerDependenciesResolverInterface $dependenciesResolver;
@@ -17,11 +19,6 @@ class ListDependenciesCommand extends Command {
         parent::__construct($name);
 
         $this->dependenciesResolver = $dependenciesResolver;
-    }
-
-    public function configure() {
-        $this->setName('dependencies:list')
-            ->setDescription('Lists all composer dependencies.');
     }
 
     public function execute(InputInterface $input, OutputInterface $output): int {
@@ -42,5 +39,7 @@ class ListDependenciesCommand extends Command {
         }
 
         $table->render();
+
+        return Command::SUCCESS;
     }
 }
